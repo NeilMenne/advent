@@ -43,9 +43,6 @@
                       (assoc-in grid [pos :neighbors])))
                grid)))
 
-(defn abs [n]
-  (if (neg? n) (- n) n))
-
 (defn above [s r c _h _w] (first (filter s (map vector (range (dec r) -1 -1) (repeat c)))))
 (defn below [s r c h _w] (first (filter s (map vector (range (inc r) h) (repeat c)))))
 (defn left [s r c _h _w] (first (filter s (map vector (repeat r) (range (dec c) -1 -1)))))
