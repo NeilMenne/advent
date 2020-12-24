@@ -2,21 +2,17 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
-(def pattern (re-pattern "e|se|sw|w|nw|ne"))
-
 (def input (slurp "resources/day_24_input.txt"))
 
-(defn line->path
-  [line]
-  (map keyword (re-seq pattern line)))
+(def pattern (re-pattern "e|se|sw|w|nw|ne"))
 
-(def sample-str "nwwswee")
+(defn line->path [line] (map keyword (re-seq pattern line)))
 
 (defn apply-step
   [[x y] step]
   (cond
-    (= :e step) [(inc x) y]
-    (= :w step) [(dec x) y]
+    (= :e step)  [(inc x) y]
+    (= :w step)  [(dec x) y]
     (= :ne step) [x (inc y)]
     (= :sw step) [x (dec y)]
     (= :nw step) [(dec x) (inc y)]
