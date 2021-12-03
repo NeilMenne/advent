@@ -13,15 +13,12 @@ defmodule Day02 do
   def known_commands, do: @known_commands
 
   defp process_command(str) do
-    [command, dist] = String.split(str)
+    [command, dist] =
+      str
+      |> String.trim_trailing()
+      |> String.split()
 
-    {String.to_existing_atom(command), to_int(dist)}
-  end
-
-  defp to_int(str) do
-    str
-    |> String.replace("\n", "")
-    |> String.to_integer()
+    {String.to_existing_atom(command), String.to_integer(dist)}
   end
 
   @doc """

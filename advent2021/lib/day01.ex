@@ -11,7 +11,7 @@ defmodule Day01 do
 
   defp to_int(str) do
     str
-    |> String.replace("\n", "")
+    |> String.trim_trailing()
     |> String.to_integer()
   end
 
