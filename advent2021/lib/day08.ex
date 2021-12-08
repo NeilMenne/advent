@@ -91,42 +91,26 @@ defmodule Day08 do
     Map.new(map, fn {k, v} -> {v, k} end)
   end
 
-  defp resolve_patterns(%{6 => [x | rest]} = unresolved, map) do
+  defp resolve_patterns(%{6 => [x | rest]} = unresolved, %{4 => four, 7 => seven} = map) do
     number =
       cond do
-        is_nine?(x, map) -> 9
-        is_zero?(x, map) -> 0
+        MapSet.subset?(four, x) -> 9
+        MapSet.subset?(seven, x) and not MapSet.disjoint?(four, x) -> 0
         true -> 6
       end
 
     resolve_patterns(%{unresolved | 6 => rest}, Map.put(map, number, x))
   end
 
-  defp resolve_patterns(%{5 => [x | rest]} = unresolved, map) do
+  defp resolve_patterns(%{5 => [x | rest]} = unresolved, %{4 => four, 6 => six, 8 => eight} = map) do
     number =
       cond do
-        is_five?(x, map) -> 5
-        is_two?(x, map) -> 2
+        MapSet.disjoint?(MapSet.difference(six, x), four) -> 5
+        MapSet.equal?(eight, MapSet.union(x, four)) -> 2
         true -> 3
       end
 
     resolve_patterns(%{unresolved | 5 => rest}, Map.put(map, number, x))
-  end
-
-  defp is_nine?(x, %{4 => four}) do
-    Enum.empty?(MapSet.difference(four, x))
-  end
-
-  defp is_zero?(x, %{4 => four, 7 => seven}) do
-    Enum.empty?(MapSet.difference(seven, x)) and not MapSet.disjoint?(four, x)
-  end
-
-  defp is_five?(x, %{4 => four, 6 => six}) do
-    MapSet.disjoint?(MapSet.difference(six, x), four)
-  end
-
-  defp is_two?(x, %{4 => four}) do
-    Enum.count(MapSet.union(x, four)) == 7
   end
 
   defp entry_to_number(%{outputs: output, resolved: resolved}) do
