@@ -91,7 +91,6 @@ defmodule Day12 do
   end
 
   @doc """
-
   Pseudo-breadth-first traversal that starts at `:source` and enumerates all
   paths given some criteria for valid paths through the graph. To make the
   process more memory efficient, paths are counted rather than returned once
