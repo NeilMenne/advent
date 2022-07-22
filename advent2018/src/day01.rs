@@ -2,7 +2,6 @@ use std::collections::HashSet;
 use std::io::prelude::*;
 use std::{fs, io};
 
-
 pub fn solve() {
     let file = fs::File::open("data/day1.txt").unwrap();
     let lines: Vec<String> = io::BufReader::new(file)

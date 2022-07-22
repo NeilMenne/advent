@@ -35,14 +35,14 @@ pub fn solve() {
 
     // part 2
     for i in 0..lines.len() {
-        for j in i+1..lines.len() {
+        for j in i + 1..lines.len() {
             if one_diff(&lines[i], &lines[j]) {
                 let ans = common_chars(&lines[i], &lines[j]);
 
                 println!("part 2: {}", ans);
                 break;
             }
-        } 
+        }
     }
 }
 
@@ -62,8 +62,8 @@ fn one_diff(a: &str, b: &str) -> bool {
 
 fn common_chars(a: &str, b: &str) -> String {
     a.chars()
-     .zip(b.chars())
-     .filter(|&(ac, bc)| ac == bc)
-     .map(|(ac, _)| ac)
-     .collect()
+        .zip(b.chars())
+        .filter(|&(ac, bc)| ac == bc)
+        .map(|(ac, _)| ac)
+        .collect()
 }

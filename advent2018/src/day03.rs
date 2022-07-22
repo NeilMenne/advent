@@ -14,19 +14,19 @@ struct Claim {
     left: u32,
     top: u32,
     width: u32,
-    height: u32
+    height: u32,
 }
 
 impl Claim {
     fn new(line: &str) -> Claim {
         let caps = CLAIM_REGEX.captures(line).unwrap();
 
-        Claim{
+        Claim {
             id: caps["id"].parse().unwrap(),
             left: caps["left"].parse().unwrap(),
             top: caps["top"].parse().unwrap(),
             width: caps["width"].parse().unwrap(),
-            height: caps["height"].parse().unwrap()
+            height: caps["height"].parse().unwrap(),
         }
     }
 }
@@ -38,10 +38,10 @@ impl<'s> IntoIterator for &'s Claim {
     type IntoIter = PointIterator<'s>;
 
     fn into_iter(self) -> Self::IntoIter {
-        PointIterator{
+        PointIterator {
             x: self.left,
             y: self.top,
-            claim: self
+            claim: self,
         }
     }
 }
@@ -49,7 +49,7 @@ impl<'s> IntoIterator for &'s Claim {
 struct PointIterator<'a> {
     x: u32,
     y: u32,
-    claim: &'a Claim
+    claim: &'a Claim,
 }
 
 impl<'s> Iterator for PointIterator<'s> {
@@ -120,20 +120,26 @@ mod tests {
 
     #[test]
     fn extrapolate_points() {
-        let claim = Claim{
+        let claim = Claim {
             id: 1,
             left: 0,
             top: 0,
             width: 3,
-            height: 3
+            height: 3,
         };
 
         let points: Vec<(u32, u32)> = claim.into_iter().collect();
 
         let expect = vec![
-            (0, 0), (1, 0), (2, 0),
-            (0, 1), (1, 1), (2, 1),
-            (0, 2), (1, 2), (2, 2)
+            (0, 0),
+            (1, 0),
+            (2, 0),
+            (0, 1),
+            (1, 1),
+            (2, 1),
+            (0, 2),
+            (1, 2),
+            (2, 2),
         ];
 
         assert_eq!(points, expect);
