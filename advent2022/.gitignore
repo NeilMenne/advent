@@ -1,0 +1,13 @@
+# Ignore the compiled output.
+dist/
+
+# TypeScript incremental compilation cache
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Node modules
+node_modules/
