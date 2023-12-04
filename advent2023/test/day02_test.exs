@@ -1,4 +1,4 @@
-defmodule Day01Test do
+defmodule Day02Test do
   use ExUnit.Case
 
   alias Advent2023.Day02
