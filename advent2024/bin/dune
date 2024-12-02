@@ -1,0 +1,4 @@
+(executable
+ (public_name advent2024)
+ (name main)
+ (libraries advent2024))
