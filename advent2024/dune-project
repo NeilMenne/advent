@@ -19,7 +19,7 @@
  (name advent2024)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune)
+ (depends ocaml)
  (tags
   (topics "to describe" your project)))
 
